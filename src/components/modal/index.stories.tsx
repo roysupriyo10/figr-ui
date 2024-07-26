@@ -32,7 +32,20 @@ export const Default: Story = {
   },
 };
 
-export const Draggable: Story = {
+export const DraggableWithoutBackdrop: Story = {
+  args: {
+    hasCloseButton: true,
+    children: "Nice",
+    trigger: "Open Modal",
+    modalBackdrop: false,
+    title: "Are you sure?",
+    description: "This is a confirmation for your following action.",
+    footer: "Footer",
+    isDraggable: true,
+  },
+};
+
+export const DraggableWithBackdrop: Story = {
   args: {
     hasCloseButton: true,
     children: "Nice",

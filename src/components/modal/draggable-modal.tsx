@@ -127,7 +127,7 @@ const DraggableModal: FC<ModalProps> = ({
           triggerRect.y + triggerRect.height + 4 + "px";
         sectionRef.current.style.left = triggerRect.x + "px";
 
-        // set the default coordinates to be at the modal position
+        // set the default coordinates to be below the trigger
         coords.current.startX = triggerRect.x;
         coords.current.startY = triggerRect.y + triggerRect.height;
         coords.current.lastX = triggerRect.x;
@@ -194,6 +194,13 @@ const DraggableModal: FC<ModalProps> = ({
         {trigger}
       </button>
       <dialog
+        onClick={() => {
+          if (modalBackdrop) {
+            if (onClose) onClose();
+
+            setIsModalOpen(false);
+          }
+        }}
         ref={modalRef}
         data-state={isModalOpen ? "open" : "closed"}
         className="
@@ -267,11 +274,11 @@ const DraggableModal: FC<ModalProps> = ({
                 className="
                   h-4
                   w-4
-                  stroke-primary
+                  stroke-primary/80
                   transition
                   duration-200
                   ease-in-out
-                  hover:stroke-primary/90
+                  hover:stroke-primary
                 "
               />
               <span className="sr-only">Close</span>

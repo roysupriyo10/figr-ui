@@ -16,6 +16,10 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+export const NoDefault: Story = {
+  args: { },
+};
+
 export const WithSystemTheme: Story = {
   args: {
     defaultTheme: "system",
