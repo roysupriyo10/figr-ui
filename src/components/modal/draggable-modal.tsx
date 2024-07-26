@@ -169,7 +169,7 @@ const DraggableModal: FC<ModalProps> = ({
       <button
         ref={triggerRef}
         className={cn(
-          typeof children === "string"
+          typeof trigger === "string"
             ? `
               bg-primary
               focus-visible:outline-none

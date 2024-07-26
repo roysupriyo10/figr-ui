@@ -39,6 +39,7 @@ const buttonVariants = cva(
         `,
         ghost: `
           hover:bg-accent
+          text-secondary-foreground
           hover:text-accent-foreground
         `,
       },
