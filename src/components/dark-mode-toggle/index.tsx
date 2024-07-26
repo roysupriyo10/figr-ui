@@ -7,12 +7,20 @@ import { Checkbox } from "../checkbox";
 
 type DarkModeToggleProps = {
   defaultTheme?: Theme;
+  storageKey?: string;
 };
 
 const DarkModeToggle: FC<DarkModeToggleProps> = ({
   defaultTheme = "light",
+  storageKey = "dark-mode-state",
 }) => {
   const [theme, setTheme] = useState<Theme>(defaultTheme);
+
+  useEffect(() => {
+    const themeState = localStorage.getItem(storageKey) as Theme;
+    document.body.dataset.theme = themeState;
+    setTheme(themeState);
+  }, []);
 
   useEffect(() => {
     if (theme === "system") {
@@ -20,6 +28,8 @@ const DarkModeToggle: FC<DarkModeToggleProps> = ({
     } else {
       document.body.dataset.theme = theme;
     }
+
+    localStorage.setItem(storageKey, theme);
   }, [theme]);
 
   return (
