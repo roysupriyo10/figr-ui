@@ -1,105 +1,55 @@
 import React from "react";
 
-import * as ModalPrimitive from "@radix-ui/react-dialog";
-
-import { cn } from "@/utils";
 import { FC, ReactNode } from "react";
 import {
-  ModalCloseButton,
-  ModalMove,
-  ModalOverlay,
-  ModalTrigger,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from "./modal-components";
 
 type ModalProps = {
-  isDraggable?: boolean;
   children?: ReactNode;
-  trigger: ReactNode;
+  title?: ReactNode;
+  description?: ReactNode;
+  footer?: ReactNode;
   className?: string;
+  isDraggable?: boolean;
   hasCloseButton?: boolean;
-  xOffset?: number;
-  yOffset?: number;
+  trigger: ReactNode;
 };
 
 const Modal: FC<ModalProps> = ({
   className = "",
-  isDraggable = false,
+  // isDraggable = false,
   hasCloseButton = true,
   children,
   trigger,
+  footer,
+  description,
+  title,
 }) => {
   return (
-    <ModalPrimitive.Root modal={!isDraggable}>
-      <ModalTrigger data-testid="modal-trigger" trigger={trigger} />
-
-      <ModalPrimitive.Portal>
-        {!isDraggable && <ModalOverlay />}
-        <ModalPrimitive.Content
-          data-testid="modal-content"
-          // ref={contentRef}
-          onEscapeKeyDown={
-            !isDraggable ? () => {} : (event) => event.preventDefault()
-          }
-          onPointerDownOutside={
-            !isDraggable ? () => {} : (event) => event.preventDefault()
-          }
-          onInteractOutside={
-            !isDraggable ? () => {} : (event) => event.preventDefault()
-          }
-          onOpenAutoFocus={
-            !isDraggable ? () => {} : (event) => event.preventDefault()
-          }
-          onCloseAutoFocus={
-            !isDraggable ? () => {} : (event) => event.preventDefault()
-          }
-          className={cn(
-            `
-              fixed
-              z-50
-              grid
-              w-full
-              max-w-lg
-              gap-4
-              border
-              bg-background
-              shadow-lg
-              scroll-m-0
-              sm:rounded-lg
-            `,
-            {
-              [`duration-200`]: !isDraggable,
-              [`translate-x-[-50%]`]: !isDraggable,
-              [`translate-y-[-50%]`]: !isDraggable,
-              [`left-[50%]`]: !isDraggable,
-              [`top-[50%]`]: !isDraggable,
-              [`data-[state=open]:animate-in`]: !isDraggable,
-              [`data-[state=closed]:animate-out`]: !isDraggable,
-              [`data-[state=closed]:fade-out-0`]: !isDraggable,
-              [`data-[state=open]:fade-in-0`]: !isDraggable,
-              [`data-[state=closed]:zoom-out-95`]: !isDraggable,
-              [`data-[state=open]:zoom-in-95`]: !isDraggable,
-              [`data-[state=closed]:slide-out-to-left-1/2`]: !isDraggable,
-              [`data-[state=closed]:slide-out-to-top-[48%]`]: !isDraggable,
-              [`data-[state=open]:slide-in-from-left-1/2`]: !isDraggable,
-              [`data-[state=open]:slide-in-from-top-[48%]`]: !isDraggable,
-              [`draggable-modal`]: isDraggable,
-            },
-            className,
-          )}
-        >
-          <div
-            className="
-              relative
-              p-6
-            "
-          >
-            {isDraggable && <ModalMove />}
-            {children}
-          </div>
-          {hasCloseButton && <ModalCloseButton />}
-        </ModalPrimitive.Content>
-      </ModalPrimitive.Portal>
-    </ModalPrimitive.Root>
+    <Dialog>
+      <DialogTrigger>
+        {trigger}
+      </DialogTrigger>
+      <DialogContent className={className} hasCloseButton={hasCloseButton}>
+        {(title || description) && (
+          <DialogHeader>
+            {title && <DialogTitle>{title}</DialogTitle>}
+            {description && (
+              <DialogDescription>{description}</DialogDescription>
+            )}
+          </DialogHeader>
+        )}
+        {children}
+        {footer && <DialogFooter>{footer}</DialogFooter>}
+      </DialogContent>
+    </Dialog>
   );
 };
 
