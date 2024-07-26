@@ -11,12 +11,13 @@ type DarkModeToggleProps = {
 };
 
 const DarkModeToggle: FC<DarkModeToggleProps> = ({
-  defaultTheme = "light",
+  defaultTheme,
   storageKey = "dark-mode-state",
 }) => {
-  const [theme, setTheme] = useState<Theme>(defaultTheme);
+  const [theme, setTheme] = useState<Theme>(defaultTheme === undefined ? "light" : defaultTheme);
 
   useEffect(() => {
+    if (defaultTheme) return;
     const themeState = localStorage.getItem(storageKey) as Theme;
     document.body.dataset.theme = themeState;
     setTheme(themeState);

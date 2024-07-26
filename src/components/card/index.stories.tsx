@@ -3,6 +3,7 @@ import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { Card } from "./index";
+import { Switch } from "../switch";
 
 const meta: Meta<typeof Card> = {
   title: "Components/CustomCard",
@@ -87,6 +88,18 @@ export const CustomHeader: Story = {
         </div>
       </div>
     ),
-    cardContent: "Content for card",
+    // children: (
+    //   <div>
+    //     <label
+    //       className="
+    //         flex
+    //         flex-col
+    //       "
+    //     >
+    //     <span></span>
+    //     <Switch />
+    //     </label>
+    //   </div>
+    // )
   },
 };

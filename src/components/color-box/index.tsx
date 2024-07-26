@@ -71,6 +71,9 @@ export const ColorBox: FC<ColorBoxProps> = ({ propertyName, label }) => {
         }
       >
         <HslColorPicker
+          style={{
+            width: "100%"
+          }}
           color={{
             h: Number(color.split(" ")[0]),
             s: Number(color.split(" ")[1]?.replace("%", "")),
@@ -83,8 +86,14 @@ export const ColorBox: FC<ColorBoxProps> = ({ propertyName, label }) => {
             document.documentElement.style.setProperty(propertyName, color);
           }}
         />
-        <span>
-          {label}{" "}
+        <span
+          className="
+            flex
+            items-center
+            gap-x-8
+          "
+        >
+          <span>{label}</span>
           <code
             className="
               rounded-sm

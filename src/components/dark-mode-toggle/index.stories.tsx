@@ -9,7 +9,14 @@ const meta: Meta<typeof DarkModeToggle> = {
     layout: "centered",
   },
   tags: ["autodocs"],
-  argTypes: {},
+  argTypes: {
+    storageKey: {
+      type: "string",
+      control: {
+        type: "text",
+      },
+    },
+  },
 };
 
 export default meta;
@@ -17,11 +24,17 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const NoDefault: Story = {
-  args: { },
+  args: {},
 };
 
 export const WithSystemTheme: Story = {
   args: {
     defaultTheme: "system",
+  },
+};
+
+export const DarkDefault: Story = {
+  args: {
+    defaultTheme: "dark",
   },
 };

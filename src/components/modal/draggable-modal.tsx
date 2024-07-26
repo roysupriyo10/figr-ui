@@ -3,7 +3,7 @@ import { FC, useEffect, useRef, useState } from "react";
 import { ModalProps } from ".";
 import { ImgCloseIcon } from "@/icons";
 import { ModalMove } from "./modal-dragger";
-import { cn } from "@/utils";
+import { assertIsNode, cn } from "@/utils";
 import { DialogFooter, DialogHeader } from "./modal-components";
 
 const DraggableModal: FC<ModalProps> = ({
@@ -88,6 +88,25 @@ const DraggableModal: FC<ModalProps> = ({
 
     return cleanup;
   }, []);
+
+  useEffect(() => {
+    if (modalBackdrop) return;
+    const closeOnClickOutside = (e: MouseEvent) => {
+      if (!sectionRef.current) return;
+      assertIsNode(e.target);
+      if (!sectionRef.current.contains(e.target)) {
+        setIsModalOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", closeOnClickOutside);
+
+    const cleanup = () => {
+      document.removeEventListener("mousedown", closeOnClickOutside);
+    };
+
+    return cleanup;
+  }, [modalBackdrop]);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
@@ -197,7 +216,6 @@ const DraggableModal: FC<ModalProps> = ({
         onClick={() => {
           if (modalBackdrop) {
             if (onClose) onClose();
-
             setIsModalOpen(false);
           }
         }}
