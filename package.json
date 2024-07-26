@@ -1,6 +1,5 @@
 {
   "name": "figr-ui",
-  "type": "module",
   "version": "0.0.1",
   "description": "A simple component library extending basic components from ShadCN UI",
   "scripts": {
@@ -13,9 +12,13 @@
   "license": "ISC",
   "devDependencies": {
     "@chromatic-com/storybook": "^1.6.1",
+    "@radix-ui/react-checkbox": "^1.1.1",
+    "@radix-ui/react-dialog": "^1.1.1",
+    "@radix-ui/react-switch": "^1.1.0",
     "@rollup/plugin-alias": "^5.1.0",
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.6",
     "@storybook/addon-essentials": "^8.2.6",
     "@storybook/addon-interactions": "^8.2.6",
@@ -27,6 +30,7 @@
     "@storybook/test": "^8.2.6",
     "@types/node": "^20.14.12",
     "@types/react": "^18.3.3",
+    "@vitejs/plugin-react-swc": "^3.7.0",
     "autoprefixer": "^10.4.19",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",

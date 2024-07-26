@@ -2,26 +2,22 @@ import resolve from "@rollup/plugin-node-resolve";
 import alias from "@rollup/plugin-alias";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
+import terser from "@rollup/plugin-terser";
 import dts from "rollup-plugin-dts";
-import fs from 'fs/promises'
-
-const packageJson = (async () => {
-  return JSON.parse(await fs.readFile('./package.json'))
-})()
 
 export default [
   {
     input: "src/index.ts",
     output: [
       {
-        file: packageJson.main,
+        file: "dist/cjs/index.js",
         format: "cjs",
-        // sourcemap: true,
+        sourcemap: true,
       },
       {
-        file: packageJson.module,
+        file: "dist/esm/index.js",
         format: "esm",
-        // sourcemap: true,
+        sourcemap: true,
       },
     ],
     plugins: [
@@ -34,12 +30,17 @@ export default [
         ],
       }),
       resolve(),
+      terser(),
       commonjs(),
-      typescript({ tsconfig: "./tsconfig.json" }),
+      typescript({
+        tsconfig: "./tsconfig.json",
+        declaration: true,
+        declarationDir: "dist"
+      }),
     ],
   },
   {
-    input: "dist/esm/types/index.d.ts",
+    input: "dist/esm/index.d.ts",
     output: [{ file: "dist/index.d.ts", format: "esm" }],
     plugins: [dts()],
   },

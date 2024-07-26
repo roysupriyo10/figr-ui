@@ -1,3 +1,5 @@
+import React from "react";
+
 import * as ModalPrimitive from "@radix-ui/react-dialog";
 
 import { cn } from "@/utils";
@@ -99,11 +101,7 @@ const Modal: FC<ModalProps> = ({
               p-6
             "
           >
-            {isDraggable && (
-              <ModalMove
-                ref={triggerRef}
-              />
-            )}
+            {isDraggable && <ModalMove ref={triggerRef} />}
             {children}
           </div>
           {hasCloseButton && <ModalCloseButton />}

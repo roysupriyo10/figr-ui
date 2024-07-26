@@ -1,3 +1,5 @@
+import React from "react";
+
 import { FC, useEffect, useState } from "react";
 import { Switch } from "../switch";
 import { Theme } from "../theme-provider";

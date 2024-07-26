@@ -1,3 +1,5 @@
+import React from "react";
+
 import { FC, useEffect, useRef, useState } from "react";
 import { Button } from "../button";
 import { HslColorPicker } from "react-colorful";
