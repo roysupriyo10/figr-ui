@@ -1,6 +1,6 @@
 {
   "name": "@roysupriyo10/figr-ui",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "A simple component library extending basic components from ShadCN UI",
   "scripts": {
     "build": "rimraf dist && rollup -c --silent && postcss src/index.css -o dist/index.css",

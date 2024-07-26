@@ -38,6 +38,7 @@ export const ColorBox: FC<ColorBoxProps> = ({ propertyName, label }) => {
         h-full
         gap-y-8
         items-start
+        min-w-[160px]
       "
     >
       <span>{label}</span>
@@ -54,11 +55,12 @@ export const ColorBox: FC<ColorBoxProps> = ({ propertyName, label }) => {
             className="
               min-w-8
               min-h-8
+              cursor-pointer
               w-8
               h-8
               rounded-full
               border
-              border-black
+              border-primary
               block
               relative
             "

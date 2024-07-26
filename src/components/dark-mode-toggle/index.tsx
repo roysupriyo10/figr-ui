@@ -28,8 +28,10 @@ const DarkModeToggle: FC<DarkModeToggleProps> = ({
         bg-background
         text-foreground
         rounded-full
-        border
-        border-primary
+        shadow-elevated-card
+        hover:shadow-elevated-card-hover
+        transition
+        duration-200
         w-max
         flex
         gap-x-4
