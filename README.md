@@ -47,3 +47,24 @@ Start the storybook server at your desired port, configuration is included
 ```
 $ npm run storybook -- -p 6006
 ```
+
+## Dark mode toggle included
+
+Import the <DarkModeToggle /> component to toggle the light and dark states of components
+
+```jsx
+  import { DarkModeToggle } from '@roysupriyo10/figr-ui';
+  
+  function App() {
+    return (
+      <body>
+        <header>
+          ...navigation
+          <DarkModeToggle
+            defaultTheme="light"
+          />
+        </header>
+      </body>
+    );
+  }
+```
