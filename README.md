@@ -2,13 +2,14 @@ Presenting figr-ui, a component library extending components from shadcn. Use th
 
 ## Installation
 
+Install the dependency with your favourite package manager, let's use npm for this example
+
 ```
 $ npm install --save @roysupriyo10/figr-ui
-$ yarn add @roysupriyo10/figr-ui
-$ pnpm add @roysupriyo10/figr-ui
-$ bun install @roysupriyo10/figr-ui
 ```
 ## Additional Steps
+
+You must include the given css file for the components to work properly
 
 ```jsx
   import React from 'react';
