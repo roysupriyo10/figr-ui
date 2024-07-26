@@ -47,8 +47,7 @@ type CardProps = {
   cardContent?: ReactNode;
   cardFooter?: ReactNode;
   variant?: CardVariant;
-} & HTMLAttributes<HTMLDivElement> &
-  VariantProps<typeof cardVariants>;
+} & HTMLAttributes<HTMLDivElement>;
 
 const Card = forwardRef<HTMLDivElement, CardProps>(
   (

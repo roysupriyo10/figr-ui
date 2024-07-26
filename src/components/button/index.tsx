@@ -1,7 +1,7 @@
 import React from "react";
 
 import { ButtonHTMLAttributes, forwardRef } from "react";
-import { cva, type VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
 
 import { cn } from "@/utils";
 import { LoadingSpinner } from "@/icons";
@@ -36,8 +36,6 @@ const buttonVariants = cva(
           bg-secondary
           text-secondary-foreground
           hover:bg-secondary/80
-          border-2
-          border-secondary-foreground
         `,
         ghost: `
           hover:bg-accent
@@ -73,9 +71,14 @@ const buttonVariants = cva(
   },
 );
 
+type ExtraButtonProps = {
+  variant?: "primary" | "secondary" | "ghost";
+  size?: "default" | "sm" | "lg" | "icon";
+};
+
 export interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+    ExtraButtonProps {
   isLoading?: boolean;
   loadingVariant?: `icon` | `bar`;
 }

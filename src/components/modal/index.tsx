@@ -3,7 +3,7 @@ import React from "react";
 import * as ModalPrimitive from "@radix-ui/react-dialog";
 
 import { cn } from "@/utils";
-import { FC, ReactNode, useRef } from "react";
+import { FC, ReactNode } from "react";
 import {
   ModalCloseButton,
   ModalMove,
@@ -30,8 +30,8 @@ const Modal: FC<ModalProps> = ({
   trigger,
 }) => {
   isDraggable = false;
-  const triggerRef = useRef<HTMLDivElement | null>(null);
-  const contentRef = useRef<HTMLDivElement | null>(null);
+  // const triggerRef = useRef<HTMLDivElement | null>(null);
+  // const contentRef = useRef<HTMLDivElement | null>(null);
 
   // const { onMouseUp, onMouseDown, onMouseMove } = useDrag({
   //   draggerSelector: `[data-dragger]`,
@@ -45,7 +45,7 @@ const Modal: FC<ModalProps> = ({
       <ModalPrimitive.Portal>
         {!isDraggable && <ModalOverlay />}
         <ModalPrimitive.Content
-          ref={contentRef}
+          // ref={contentRef}
           onEscapeKeyDown={
             !isDraggable ? () => {} : (event) => event.preventDefault()
           }
@@ -101,7 +101,7 @@ const Modal: FC<ModalProps> = ({
               p-6
             "
           >
-            {isDraggable && <ModalMove ref={triggerRef} />}
+            {isDraggable && <ModalMove />}
             {children}
           </div>
           {hasCloseButton && <ModalCloseButton />}

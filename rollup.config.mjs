@@ -1,9 +1,14 @@
 import resolve from "@rollup/plugin-node-resolve";
+import tailwindcss from 'tailwindcss';
 import alias from "@rollup/plugin-alias";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import terser from "@rollup/plugin-terser";
 import dts from "rollup-plugin-dts";
+import postcss from "rollup-plugin-postcss";
+import tailwindConfig from './tailwind.config.mjs';
+import PeerDepsExternalPlugin from "rollup-plugin-peer-deps-external";
+import autoprefixer from "autoprefixer";
 
 export default [
   {
@@ -21,6 +26,7 @@ export default [
       },
     ],
     plugins: [
+      PeerDepsExternalPlugin(),
       alias({
         entries: [
           {
@@ -29,19 +35,34 @@ export default [
           },
         ],
       }),
-      resolve(),
-      terser(),
+      resolve({
+        extensions: ['.css']
+      }),
       commonjs(),
       typescript({
         tsconfig: "./tsconfig.json",
         declaration: true,
         declarationDir: "dist"
       }),
+      postcss({
+        config: {
+          path: "./postcss.config.js"
+        },
+        to: "dist/index.css",
+        inject: true,
+        extract: true,
+        plugins: [
+          autoprefixer(),
+          tailwindcss(tailwindConfig)
+        ]
+      }),
+      terser(),
     ],
   },
   {
     input: "dist/esm/index.d.ts",
     output: [{ file: "dist/index.d.ts", format: "esm" }],
     plugins: [dts()],
+    external: [/\.css$/]
   },
 ];
