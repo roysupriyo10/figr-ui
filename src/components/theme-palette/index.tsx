@@ -12,6 +12,8 @@ const ThemePalette: FC = () => {
         flex
         flex-col
         gap-y-7
+        bg-background
+        text-secondary-foreground
         p-12
         border-2
         shadow-elevated-card

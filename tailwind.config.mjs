@@ -13,8 +13,8 @@ export default {
     },
     extend: {
       boxShadow: {
-        "elevated-card": "-1px 2px 9.1px 0px rgba(0, 0, 0, 0.11)",
-        "elevated-card-hover": "-1px 2px 9.1px 0px rgba(0, 0, 0, 0.22)",
+        "elevated-card": "-1px 2px 9.1px 0px hsla(var(--shadow))",
+        "elevated-card-hover": "-1px 2px 9.1px 0px hsla(var(--shadow-hover))",
       },
       colors: {
         border: "hsl(var(--border))",

@@ -1,8 +1,9 @@
 import React from "react";
 
 import { HslColorPicker } from "react-colorful";
-import { assertIsNode, hslToHex } from "@/utils";
-import { FC, useEffect, useRef, useState } from "react";
+import { hslToHex } from "@/utils";
+import { FC, useEffect, useState } from "react";
+import { Modal } from "../modal";
 
 export enum ColorPropertyNames {
   PRIMARY = "--primary",
@@ -18,37 +19,6 @@ type ColorBoxProps = {
 
 export const ColorBox: FC<ColorBoxProps> = ({ propertyName, label }) => {
   const [color, setColor] = useState<string>("");
-  const [isPickerOpen, setIsPickerOpen] = useState<boolean>(false);
-
-  const openerRef = useRef<HTMLDivElement | null>(null);
-  const spanRef = useRef<HTMLSpanElement | null>(null);
-
-  useEffect(() => {
-    if (!isPickerOpen) return;
-    const listener = (event: MouseEvent) => {
-      if (!openerRef.current) return;
-      if (!spanRef.current) return;
-      assertIsNode(event.target);
-
-      if (spanRef.current.contains(event.target)) return;
-
-      assertIsNode(event.target);
-      if (
-        openerRef.current.contains(event.target) &&
-        !spanRef.current.contains(event.target)
-      )
-        return;
-
-      setIsPickerOpen(false);
-    };
-    document.addEventListener("click", listener);
-
-    const cleanup = () => {
-      document.removeEventListener("click", listener);
-    };
-
-    return cleanup;
-  }, [isPickerOpen]);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -68,70 +38,56 @@ export const ColorBox: FC<ColorBoxProps> = ({ propertyName, label }) => {
         h-full
         gap-y-8
         items-start
-        min-w-[160px]
       "
     >
       <span>{label}</span>
-      <div
+      <Modal
         className="
-          w-full
-          flex
-          items-center
-          gap-x-2
+          max-w-max
         "
+        title={`Color picker`}
+        description="Pick a color and see it in the preview"
+        isDraggable
+        modalBackdrop={false}
+        trigger={
+          <span
+            className="
+              min-w-8
+              min-h-8
+              w-8
+              h-8
+              rounded-full
+              border
+              border-black
+              block
+              relative
+            "
+            style={{
+              backgroundColor: `hsl(${color})`,
+            }}
+          ></span>
+        }
       >
-        <span
-          ref={spanRef}
-          className="
-            w-8
-            h-8
-            rounded-full
-            border
-            border-black
-            relative
-          "
-          style={{
-            backgroundColor: `hsl(${color})`,
+        <HslColorPicker
+          color={{
+            h: Number(color.split(" ")[0]),
+            s: Number(color.split(" ")[1]?.replace("%", "")),
+            l: Number(color.split(" ")[2]?.replace("%", "")),
           }}
-          onClick={() => {
-            setIsPickerOpen(!isPickerOpen);
+          onChange={(newColor) => {
+            const color = `${newColor.h} ${newColor.s}% ${newColor.l}%`;
+            setColor(color);
+            // const cssText = ``
+            document.documentElement.style.setProperty(propertyName, color);
           }}
-        >
-          {isPickerOpen && (
-            <div
-              ref={openerRef}
-              onClick={(event) => event.stopPropagation()}
-              className="
-                z-50
-                absolute
-                top-[calc(100%_+_10px)]
-                left-[calc(100%_+_10px)]
-              "
-            >
-              <HslColorPicker
-                color={{
-                  h: Number(color.split(" ")[0]),
-                  s: Number(color.split(" ")[1]?.replace("%", "")),
-                  l: Number(color.split(" ")[2]?.replace("%", "")),
-                }}
-                onChange={(newColor) => {
-                  const color = `${newColor.h} ${newColor.s}% ${newColor.l}%`;
-                  setColor(color);
-                  // const cssText = ``
-                  document.documentElement.style.setProperty(
-                    propertyName,
-                    color,
-                  );
-                }}
-              />
-            </div>
-          )}
-        </span>
+        />
         <span>
+          {label}{" "}
           <code
             className="
               rounded-sm
-              bg-gray-200
+              bg-primary
+              text-primary-foreground
               p-1
             "
           >
@@ -142,7 +98,7 @@ export const ColorBox: FC<ColorBoxProps> = ({ propertyName, label }) => {
             )}
           </code>
         </span>
-      </div>
+      </Modal>
     </div>
   );
 };

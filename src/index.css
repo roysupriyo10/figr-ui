@@ -15,6 +15,9 @@
   }
   :root,
   body[data-theme="light"] {
+    --shadow: 0 0% 0% 0.11;
+    --shadow-hover: 0 0% 0% 0.22;
+
     --background: 0 0% 100%;
     --foreground: 222.2 47.4% 11.2%;
 
@@ -49,6 +52,9 @@
 
   .dark,
   body[data-theme="dark"] {
+    --shadow: 0 0% 100% 0.11;
+    --shadow-hover: 0 0% 100% 0.22;
+
     --background: 224 71% 4%;
     --foreground: 213 31% 91%;
 

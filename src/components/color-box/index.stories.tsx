@@ -25,5 +25,6 @@ type Story = StoryObj<typeof meta>;
 export const WithSystemTheme: Story = {
   args: {
     propertyName: ColorPropertyNames.PRIMARY,
+    label: "Primary",
   },
 };

@@ -15,10 +15,9 @@ const DarkModeToggle: FC<DarkModeToggleProps> = ({
   const [theme, setTheme] = useState<Theme>(defaultTheme);
 
   useEffect(() => {
-    if (theme === "system"){
+    if (theme === "system") {
       document.body.dataset.theme = undefined;
-    }
-    else {
+    } else {
       document.body.dataset.theme = theme;
     }
   }, [theme]);
@@ -29,9 +28,11 @@ const DarkModeToggle: FC<DarkModeToggleProps> = ({
         bg-background
         text-foreground
         rounded-full
+        border
+        border-primary
+        w-max
         flex
         gap-x-4
-        shadow-elevated-card
         py-2
         px-4
       "

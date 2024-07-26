@@ -12,7 +12,7 @@ type ImgMovableIconProps = {
 const ImgMovableIcon: FC<ImgMovableIconProps> = ({
   width = 18,
   height = 18,
-  className = "",
+  className,
   fill = "#404040",
 }) => (
   <svg

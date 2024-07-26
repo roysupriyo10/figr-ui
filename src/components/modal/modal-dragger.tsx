@@ -18,6 +18,12 @@ export const ModalMove = forwardRef<
     "
     {...props}
   >
-    <ImgMovableIcon />
+    <ImgMovableIcon
+      className="
+        w-8
+        h-4
+        stroke-secondary-foreground
+      "
+    />
   </div>
 ));

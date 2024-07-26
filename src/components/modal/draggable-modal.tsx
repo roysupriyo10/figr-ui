@@ -17,10 +17,12 @@ const DraggableModal: FC<ModalProps> = ({
   description,
   title,
 }) => {
-  const triggerRef = useRef<HTMLDivElement | null>(null);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const moveTriggerRef = useRef<HTMLDivElement | null>(null);
   const modalRef = useRef<HTMLDialogElement | null>(null);
+  const sectionRef = useRef<HTMLDivElement | null>(null);
 
-  const isDragging = useRef<boolean>(false);
+  const isDraggingRef = useRef<boolean>(false);
 
   const coords = useRef<{
     startX: number;
@@ -34,30 +36,35 @@ const DraggableModal: FC<ModalProps> = ({
     lastY: 0,
   });
 
-  useEffect(() => {
-    if (!modalRef.current || !triggerRef.current) return;
+  const [isDragging, setIsDragging] = useState<boolean>(false);
 
-    const modal = modalRef.current;
-    const trigger = triggerRef.current;
+  useEffect(() => {
+    if (!sectionRef.current || !moveTriggerRef.current || !modalRef.current)
+      return;
+
+    const modal = sectionRef.current;
+    const trigger = moveTriggerRef.current;
 
     const onMouseDown = (e: MouseEvent) => {
-      console.log("start dragging", e);
-      isDragging.current = true;
+      isDraggingRef.current = true;
+      setIsDragging(true);
       coords.current.startX = e.clientX;
       coords.current.startY = e.clientY;
     };
 
-    const onMouseUp = (e: MouseEvent) => {
-      console.log("end dragging", e);
-      isDragging.current = false;
+    const onMouseUp = () => {
+      isDraggingRef.current = false;
+      setIsDragging(false);
       coords.current.lastX = modal.offsetLeft;
       coords.current.lastY = modal.offsetTop;
     };
 
     const onMouseMove = (e: MouseEvent) => {
-      console.log("continue dragging", e);
-      if (!isDragging.current) return;
+      if (!isDraggingRef.current) return;
 
+      console.log(coords.current);
+      const triggerRect = triggerRef.current?.getBoundingClientRect();
+      console.log(triggerRect);
       const nextX = e.clientX - coords.current.startX + coords.current.lastX;
       const nextY = e.clientY - coords.current.startY + coords.current.lastY;
 
@@ -69,11 +76,13 @@ const DraggableModal: FC<ModalProps> = ({
     trigger.addEventListener("mouseup", onMouseUp);
     document.body.addEventListener("mousemove", onMouseMove);
     document.body.addEventListener("mouseleave", onMouseUp);
+    document.body.addEventListener("mouseup", onMouseUp);
 
     const cleanup = () => {
       trigger.removeEventListener("mousedown", onMouseDown);
       trigger.removeEventListener("mouseup", onMouseUp);
       document.body.removeEventListener("mousemove", onMouseMove);
+      document.body.removeEventListener("mouseup", onMouseUp);
       document.body.removeEventListener("mouseleave", onMouseUp);
     };
 
@@ -92,12 +101,37 @@ const DraggableModal: FC<ModalProps> = ({
 
   useEffect(() => {
     if (!modalRef.current) return;
+    if (!sectionRef.current) return;
+    if (!triggerRef.current) return;
 
     if (isModalOpen) {
       if (modalBackdrop) {
         modalRef.current.showModal();
+
+        const sectionRect = sectionRef.current.getBoundingClientRect();
+
+        sectionRef.current.style.top = "50%";
+        sectionRef.current.style.left = "50%";
+        sectionRef.current.style.transform = "translate(-50%, -50%)";
+
+        coords.current.startY = sectionRect.top + sectionRect.height / 2;
+        coords.current.startX = sectionRect.left * 2;
+        coords.current.lastY = sectionRect.top + sectionRect.height / 2;
+        coords.current.lastX = sectionRect.left * 2;
       } else {
         modalRef.current.show();
+        const triggerRect = triggerRef.current.getBoundingClientRect();
+
+        // make the modal appear right below the trigger in case of non-modal
+        sectionRef.current.style.top =
+          triggerRect.y + triggerRect.height + 4 + "px";
+        sectionRef.current.style.left = triggerRect.x + "px";
+
+        // set the default coordinates to be at the modal position
+        coords.current.startX = triggerRect.x;
+        coords.current.startY = triggerRect.y + triggerRect.height;
+        coords.current.lastX = triggerRect.x;
+        coords.current.lastY = triggerRect.y + triggerRect.height + 4;
       }
     } else {
       modalRef.current.close();
@@ -133,6 +167,7 @@ const DraggableModal: FC<ModalProps> = ({
   return (
     <>
       <button
+        ref={triggerRef}
         className={cn(
           typeof children === "string"
             ? `
@@ -167,29 +202,76 @@ const DraggableModal: FC<ModalProps> = ({
         "
       >
         <section
+          ref={sectionRef}
           className={cn(
-            "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg",
+            {
+              "duration-200": !isDragging,
+              "top-1/2": modalBackdrop,
+              "left-1/2": modalBackdrop,
+              "-translate-y-1/2": modalBackdrop,
+              "-translate-x-1/2": modalBackdrop,
+            },
+            `
+              z-50
+              fixed
+              grid
+              w-full
+              max-w-lg
+              gap-4
+              border
+              bg-background
+              p-6
+              text-secondary-foreground
+              shadow-lg
+              data-[state=open]:animate-in
+              data-[state=closed]:animate-out
+              data-[state=closed]:fade-out-0
+              data-[state=open]:fade-in-0
+              data-[state=closed]:zoom-out-95
+              data-[state=open]:zoom-in-95
+              data-[state=closed]:slide-out-to-left-1/2
+              data-[state=closed]:slide-out-to-top-[48%]
+              data-[state=open]:slide-in-from-left-1/2
+              data-[state=open]:slide-in-from-top-[48%]
+              sm:rounded-lg
+            `,
             className,
           )}
           onClick={(event) => {
             event.stopPropagation();
           }}
         >
-          <ModalMove ref={triggerRef} />
+          <ModalMove ref={moveTriggerRef} />
           {hasCloseButton && (
             <button
-              className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
+              className="
+                absolute
+                right-4
+                top-4
+                rounded-sm
+                opacity-70
+                ring-offset-background
+                transition-opacity
+                hover:opacity-100
+                focus:outline-none
+                focus:ring-2
+                focus:ring-ring
+                focus:ring-offset-2
+                disabled:pointer-events-none
+                data-[state=open]:bg-accent
+                data-[state=open]:text-muted-foreground
+              "
               onClick={handleCloseModal}
             >
               <ImgCloseIcon
                 className="
                   h-4
                   w-4
-                  stroke-gray-800/80
+                  stroke-primary
                   transition
                   duration-200
                   ease-in-out
-                  hover:stroke-black
+                  hover:stroke-primary/90
                 "
               />
               <span className="sr-only">Close</span>
@@ -200,7 +282,13 @@ const DraggableModal: FC<ModalProps> = ({
               {title && (
                 <div
                   className={cn(
-                    "text-lg font-semibold leading-none tracking-tight",
+                    `
+                      text-lg
+                      font-semibold
+                      leading-none
+                      tracking-tight
+                      text-secondary-foreground
+                    `,
                   )}
                 >
                   {title}
