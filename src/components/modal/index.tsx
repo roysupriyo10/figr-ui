@@ -10,7 +10,6 @@ import {
   ModalOverlay,
   ModalTrigger,
 } from "./modal-components";
-// import { useDrag } from "@/hooks";
 
 type ModalProps = {
   isDraggable?: boolean;
@@ -29,15 +28,6 @@ const Modal: FC<ModalProps> = ({
   children,
   trigger,
 }) => {
-  isDraggable = false;
-  // const triggerRef = useRef<HTMLDivElement | null>(null);
-  // const contentRef = useRef<HTMLDivElement | null>(null);
-
-  // const { onMouseUp, onMouseDown, onMouseMove } = useDrag({
-  //   draggerSelector: `[data-dragger]`,
-  //   targetSelector: `[role="dialog"].draggable-modal`,
-  // });
-
   return (
     <ModalPrimitive.Root modal={!isDraggable}>
       <ModalTrigger trigger={trigger} />
