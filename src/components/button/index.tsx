@@ -98,6 +98,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     return (
       <button
+        data-testid="button"
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}

@@ -12,33 +12,15 @@ type DarkModeToggleProps = {
 const DarkModeToggle: FC<DarkModeToggleProps> = ({
   defaultTheme = "light",
 }) => {
-  // const { setTheme, theme } = useTheme();
   const [theme, setTheme] = useState<Theme>(defaultTheme);
 
-  // useEffect(() => {
-  //   const root = window.document.documentElement;
-  //
-  //   root.classList.remove("light", "dark");
-  //
-  //   if (defaultTheme === "system") {
-  //     const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-  //       .matches
-  //       ? "dark"
-  //       : "light";
-  //
-  //     document.body.dataset.theme = systemTheme;
-  //     root.classList.add(systemTheme);
-  //     return;
-  //   }
-  //
-  //   // root.classList.add(theme);
-  //   // if (theme !== defaultTheme) {
-  //   //   setTheme(defaultTheme);
-  //   // }
-  // }, []);
-
   useEffect(() => {
-    document.body.dataset.theme = theme;
+    if (theme === "system"){
+      document.body.dataset.theme = undefined;
+    }
+    else {
+      document.body.dataset.theme = theme;
+    }
   }, [theme]);
 
   return (

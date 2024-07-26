@@ -4,6 +4,7 @@ import { FC, useEffect, useRef, useState } from "react";
 import { Button } from "../button";
 import { HslColorPicker } from "react-colorful";
 import { assertIsNode, hslToHex } from "@/utils";
+import { DarkModeToggle } from "../dark-mode-toggle";
 
 type ColorBoxProps = {
   label: string;
@@ -115,6 +116,7 @@ const ColorBox: FC<ColorBoxProps> = ({ propertyName, label }) => {
                 onChange={(newColor) => {
                   const color = `${newColor.h} ${newColor.s}% ${newColor.l}%`;
                   setColor(color);
+                  // const cssText = ``
                   document.documentElement.style.setProperty(
                     propertyName,
                     color,
@@ -158,6 +160,7 @@ const ThemePalette: FC = () => {
         min-w-[500px]
       "
     >
+      <DarkModeToggle />
       <div
         className="
           flex

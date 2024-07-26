@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 
 import { forwardRef, HTMLAttributes, ReactNode } from "react";
 import { cn } from "@/utils";
@@ -40,24 +40,27 @@ const cardVariants = cva(
   },
 );
 
-type CardVariant = "elevated" | "flat";
+export type CardVariant = "elevated" | "flat";
 
-type CardProps = {
+export type CardProps = {
   cardHeader?: CardHeaderRequirementType | ReactNode;
   cardContent?: ReactNode;
   cardFooter?: ReactNode;
   variant?: CardVariant;
+  style?: CSSProperties;
+  contentClassName?: string;
 } & HTMLAttributes<HTMLDivElement>;
 
 const Card = forwardRef<HTMLDivElement, CardProps>(
   (
     {
+      contentClassName = "",
       className = "",
       cardHeader = "",
-      cardContent = "",
       cardFooter = "",
       variant = "flat",
       children,
+      style,
       ...props
     },
     ref,
@@ -77,6 +80,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
     );
     return (
       <div
+        data-testid="card"
         ref={ref}
         className={cn(cardVariants({ variant }), className)}
         {...props}
@@ -91,7 +95,9 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
             )}
           </CardHeader>
         )}
-        {cardContent && <CardContent>{cardContent}</CardContent>}
+        <CardContent
+          className={contentClassName}
+        style={style}>{children}</CardContent>
         {cardFooter && <CardFooter>{cardFooter}</CardFooter>}
       </div>
     );

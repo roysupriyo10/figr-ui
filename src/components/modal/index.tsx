@@ -30,11 +30,12 @@ const Modal: FC<ModalProps> = ({
 }) => {
   return (
     <ModalPrimitive.Root modal={!isDraggable}>
-      <ModalTrigger trigger={trigger} />
+      <ModalTrigger data-testid="modal-trigger" trigger={trigger} />
 
       <ModalPrimitive.Portal>
         {!isDraggable && <ModalOverlay />}
         <ModalPrimitive.Content
+          data-testid="modal-content"
           // ref={contentRef}
           onEscapeKeyDown={
             !isDraggable ? () => {} : (event) => event.preventDefault()
@@ -62,6 +63,7 @@ const Modal: FC<ModalProps> = ({
               border
               bg-background
               shadow-lg
+              scroll-m-0
               sm:rounded-lg
             `,
             {
