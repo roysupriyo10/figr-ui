@@ -1,5 +1,4 @@
 import React from "react";
-import "@/index.css";
 
 import { forwardRef, HTMLAttributes, ReactNode } from "react";
 import { cn } from "@/utils";

@@ -1,5 +1,4 @@
 import React from "react";
-import '@/index.css';
 
 import * as ModalPrimitive from "@radix-ui/react-dialog";
 

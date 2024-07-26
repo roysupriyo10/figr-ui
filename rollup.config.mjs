@@ -35,9 +35,7 @@ export default [
           },
         ],
       }),
-      resolve({
-        extensions: ['.css']
-      }),
+      resolve(),
       commonjs(),
       typescript({
         tsconfig: "./tsconfig.json",
@@ -49,6 +47,7 @@ export default [
           path: "./postcss.config.js"
         },
         to: "dist/index.css",
+        extensions: ['.css'],
         inject: true,
         extract: true,
         plugins: [

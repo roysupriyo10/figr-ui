@@ -1,5 +1,4 @@
 import React from "react";
-import "@/index.css";
 
 import { ButtonHTMLAttributes, forwardRef } from "react";
 import { cva } from "class-variance-authority";
