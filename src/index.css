@@ -7,6 +7,12 @@
 }
 
 @layer base {
+  body[data-scroll-locked="1"] {
+    overflow: hidden !important;
+    overscroll-behavior: contain;
+    position: relative !important;
+    margin-right: 15px !important;
+  }
   :root,
   body[data-theme="light"] {
     --background: 0 0% 100%;
@@ -73,5 +79,11 @@
     --ring: 216 34% 17%;
 
     --radius: 0.5rem;
+  }
+}
+
+@layer components {
+  .draggable-modal::backdrop {
+    @apply fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0;
   }
 }

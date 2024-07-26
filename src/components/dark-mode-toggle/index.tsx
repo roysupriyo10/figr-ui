@@ -41,7 +41,6 @@ const DarkModeToggle: FC<DarkModeToggleProps> = ({
         disabled={theme === "system"}
         checked={theme === "dark"}
         onCheckedChange={(checked) => {
-          console.log(checked);
           setTheme(checked ? "dark" : "light");
         }}
       />

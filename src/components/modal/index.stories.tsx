@@ -25,5 +25,22 @@ export const Default: Story = {
     hasCloseButton: true,
     children: "Nice",
     trigger: "Open Modal",
+    modalBackdrop: true,
+    title: "Are you sure?",
+    description: "This is a confirmation for your following action.",
+    footer: "Footer",
+  },
+};
+
+export const Draggable: Story = {
+  args: {
+    hasCloseButton: true,
+    children: "Nice",
+    trigger: "Open Modal",
+    modalBackdrop: true,
+    title: "Are you sure?",
+    description: "This is a confirmation for your following action.",
+    footer: "Footer",
+    isDraggable: true,
   },
 };

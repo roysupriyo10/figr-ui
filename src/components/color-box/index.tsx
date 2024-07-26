@@ -32,8 +32,6 @@ export const ColorBox: FC<ColorBoxProps> = ({ propertyName, label }) => {
 
       if (spanRef.current.contains(event.target)) return;
 
-      console.log("clicked", openerRef.current.contains(event.target));
-
       assertIsNode(event.target);
       if (
         openerRef.current.contains(event.target) &&
@@ -58,8 +56,6 @@ export const ColorBox: FC<ColorBoxProps> = ({ propertyName, label }) => {
     const rootStyles = getComputedStyle(root);
 
     const color = rootStyles.getPropertyValue(propertyName).trim();
-
-    console.log(color.split(" "));
 
     setColor(color);
   }, []);
