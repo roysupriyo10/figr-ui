@@ -1,4 +1,5 @@
 import React from "react";
+import '@/index.css';
 
 import { FC, useEffect, useRef, useState } from "react";
 import { Button } from "../button";

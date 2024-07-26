@@ -1,8 +1,9 @@
 import React from "react";
+import "@/index.css";
 
 import { forwardRef, HTMLAttributes, ReactNode } from "react";
 import { cn } from "@/utils";
-import { cva, VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
 
 type CardHeaderRequirementType = { title: string; description: string };
 

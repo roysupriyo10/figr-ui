@@ -1,4 +1,5 @@
 import React from "react";
+import "@/index.css";
 
 import { ReactNode, useContext, useEffect, useState } from "react";
 import { createContext } from "react";

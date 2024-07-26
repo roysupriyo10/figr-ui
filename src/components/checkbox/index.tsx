@@ -1,4 +1,5 @@
 import React from "react";
+import '@/index.css';
 
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import { cn } from "@/utils";

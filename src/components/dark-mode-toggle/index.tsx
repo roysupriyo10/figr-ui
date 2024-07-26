@@ -1,4 +1,5 @@
 import React from "react";
+import '@/index.css';
 
 import { FC, useEffect, useState } from "react";
 import { Switch } from "../switch";
