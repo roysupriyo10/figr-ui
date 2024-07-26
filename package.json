@@ -1,5 +1,5 @@
 {
-  "name": "figr-ui",
+  "name": "@roysupriyo10/figr-ui",
   "version": "0.0.1",
   "description": "A simple component library extending basic components from ShadCN UI",
   "scripts": {
@@ -55,5 +55,9 @@
   "files": [
     "dist"
   ],
-  "types": "dist/index.d.ts"
+  "types": "dist/index.d.ts",
+
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/roysupriyo10"
+  }
 }
