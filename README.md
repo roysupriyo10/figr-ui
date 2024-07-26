@@ -59,7 +59,7 @@ Import the <DarkModeToggle /> component to toggle the light and dark states of c
     return (
       <body>
         <header>
-          ...navigation
+          // ...navigation
           <DarkModeToggle
             defaultTheme="light"
           />
