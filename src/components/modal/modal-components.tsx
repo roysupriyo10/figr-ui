@@ -11,28 +11,35 @@ type DialogTriggerProps = {
   children?: ReactNode;
 };
 
-const DialogTrigger: FC<DialogTriggerProps> = ({ className = "", children }) => (
+const DialogTrigger: FC<DialogTriggerProps> = ({
+  className = "",
+  children,
+}) => (
   <DialogPrimitive.Trigger
     className={cn(
-      `
-        bg-primary
-        focus-visible:outline-none
-        transition-colors
-        focus-visible:ring-2
-        focus-visible:ring-ring
-        focus-visible:ring-offset-2
-        disabled:pointer-events-none
-        disabled:opacity-50
-        text-primary-foreground
-        rounded-md
-        h-10
-        hover:bg-primary/90
-        px-4
-        py-2
-      `,
+      typeof children === "string"
+        ? `
+          bg-primary
+          focus-visible:outline-none
+          transition-colors
+          focus-visible:ring-2
+          focus-visible:ring-ring
+          focus-visible:ring-offset-2
+          disabled:pointer-events-none
+          disabled:opacity-50
+          text-primary-foreground
+          rounded-md
+          h-10
+          hover:bg-primary/90
+          px-4
+          py-2
+        `
+        : false,
       className,
     )}
-  >{children}</DialogPrimitive.Trigger>
+  >
+    {children}
+  </DialogPrimitive.Trigger>
 );
 
 const DialogPortal = DialogPrimitive.Portal;

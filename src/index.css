@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  animation-fill-mode: forwards;
+}
+
 @layer base {
   :root,
   body[data-theme="light"] {
@@ -71,4 +75,3 @@
     --radius: 0.5rem;
   }
 }
-
