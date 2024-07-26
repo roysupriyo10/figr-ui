@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { DarkModeToggle } from "./index";
 
 const meta: Meta<typeof DarkModeToggle> = {
-  title: "Components/CustomDarkModeToggle",
+  title: "Utilities/DarkModeToggle",
   component: DarkModeToggle,
   parameters: {
     layout: "centered",

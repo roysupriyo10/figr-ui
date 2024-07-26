@@ -1,4 +1,5 @@
 export * from "./card";
+export * from './color-box';
 export * from "./theme-provider";
 export * from "./switch";
 export * from "./checkbox";

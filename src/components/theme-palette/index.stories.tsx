@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { ThemePalette } from "./index";
 
 const meta: Meta<typeof ThemePalette> = {
-  title: "Components/CustomThemePalette",
+  title: "Utilities/ThemePalette",
   component: ThemePalette,
   parameters: {
     layout: "centered",

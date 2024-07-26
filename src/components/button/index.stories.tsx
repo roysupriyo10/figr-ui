@@ -8,6 +8,19 @@ const meta: Meta<typeof Button> = {
   parameters: {
     layout: "centered",
   },
+  argTypes: {
+    variant: {
+      options: ["primary", "secondary", "ghost"],
+      control: {
+        type: "select",
+      },
+      mapping: {
+        primary: "primary",
+        secondary: "secondary",
+        ghost: "ghost",
+      },
+    },
+  },
   tags: ["autodocs"],
 };
 
