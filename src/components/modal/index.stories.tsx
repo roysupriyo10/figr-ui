@@ -29,6 +29,7 @@ export const Default: Story = {
     title: "Are you sure?",
     description: "This is a confirmation for your following action.",
     footer: "Footer",
+  style: {},
   },
 };
 
@@ -39,6 +40,7 @@ export const DraggableWithoutBackdrop: Story = {
     trigger: "Open Modal",
     modalBackdrop: false,
     title: "Are you sure?",
+  style: {},
     description: "This is a confirmation for your following action.",
     footer: "Footer",
     isDraggable: true,
@@ -54,6 +56,7 @@ export const DraggableWithBackdrop: Story = {
     title: "Are you sure?",
     description: "This is a confirmation for your following action.",
     footer: "Footer",
+  style: {},
     isDraggable: true,
   },
 };

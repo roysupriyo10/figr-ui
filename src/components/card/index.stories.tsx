@@ -4,6 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Card } from "./index";
 import { Switch } from "../switch";
+import { Button } from "../button";
 
 const meta: Meta<typeof Card> = {
   title: "Components/CustomCard",
@@ -38,7 +39,8 @@ export const Flat: Story = {
       title: "Card title",
       description: "Card description",
     },
-    cardContent: "Content for card",
+    children: "Content for card",
+    style: {},
     variant: "flat",
   },
 };
@@ -46,20 +48,25 @@ export const Flat: Story = {
 export const Elevated: Story = {
   args: {
     className: "min-w-[350px]",
+    style: {},
     cardFooter: "Footer for card",
     cardHeader: {
       title: "Card title",
       description: "Card description",
     },
-    cardContent: "Content for card",
+    children: "Content for card",
     variant: "elevated",
   },
 };
 
 export const CustomHeader: Story = {
   args: {
+    style: {},
     className: "min-w-[350px]",
     cardFooter: "Footer for card",
+    children: <Button
+    variant="primary"
+  >Some button</Button>,
     cardHeader: (
       <div
         className="
@@ -88,18 +95,5 @@ export const CustomHeader: Story = {
         </div>
       </div>
     ),
-    // children: (
-    //   <div>
-    //     <label
-    //       className="
-    //         flex
-    //         flex-col
-    //       "
-    //     >
-    //     <span></span>
-    //     <Switch />
-    //     </label>
-    //   </div>
-    // )
   },
 };

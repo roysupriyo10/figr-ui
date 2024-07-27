@@ -95,9 +95,9 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
             )}
           </CardHeader>
         )}
-        <CardContent
-          className={contentClassName}
-        style={style}>{children}</CardContent>
+        <CardContent className={contentClassName} style={style}>
+          {children}
+        </CardContent>
         {cardFooter && <CardFooter>{cardFooter}</CardFooter>}
       </div>
     );
