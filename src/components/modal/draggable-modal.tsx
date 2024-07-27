@@ -11,6 +11,7 @@ const DraggableModal: FC<ModalProps> = ({
   hasCloseButton = true,
   onClose,
   modalBackdrop,
+  style,
   children,
   trigger,
   footer,
@@ -227,6 +228,7 @@ const DraggableModal: FC<ModalProps> = ({
       >
         <section
           ref={sectionRef}
+          style={style}
           className={cn(
             {
               "duration-200": !isDragging,

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 
 import { FC, ReactNode } from "react";
 import {
@@ -23,6 +23,7 @@ export type ModalProps = {
   hasCloseButton?: boolean;
   onClose?: () => void;
   trigger: ReactNode;
+  style?: CSSProperties;
 };
 
 const Modal: FC<ModalProps> = ({
@@ -35,6 +36,7 @@ const Modal: FC<ModalProps> = ({
   trigger,
   footer,
   description,
+  style,
   title,
 }) => {
   return isDraggable ? (
@@ -49,6 +51,7 @@ const Modal: FC<ModalProps> = ({
       footer={footer}
       description={description}
       title={title}
+      style={style}
     />
   ) : (
     <Dialog
@@ -57,7 +60,11 @@ const Modal: FC<ModalProps> = ({
       }}
     >
       <DialogTrigger>{trigger}</DialogTrigger>
-      <DialogContent className={className} hasCloseButton={hasCloseButton}>
+      <DialogContent
+        style={style}
+        className={className}
+        hasCloseButton={hasCloseButton}
+      >
         {(title || description) && (
           <DialogHeader>
             {title && <DialogTitle>{title}</DialogTitle>}
