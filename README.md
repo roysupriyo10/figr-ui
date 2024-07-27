@@ -5,7 +5,7 @@ Presenting figr-ui, a component library extending components from shadcn. Use th
 Install the dependency with your favourite package manager, let's use npm for this example
 
 ```
-$ npm install --save @roysupriyo10/figr-ui
+$ npm install --save roysupriyo10-figr-ui
 ```
 ## Integration Steps
 
@@ -14,8 +14,8 @@ You must include the given css file for the components to work properly
 ```jsx
   import React from 'react';
 
-  import { Button } from '@roysupriyo10/figr-ui';
-  import '@roysupriyo10/figr-ui/dist/index.css';
+  import { Button } from 'roysupriyo10-figr-ui';
+  import 'roysupriyo10-figr-ui/dist/index.css';
   
   function App(){
     const [loading, setLoading] = React.useState(false);
@@ -59,7 +59,7 @@ $ npm run storybook -- -p 6006
 Import the <DarkModeToggle /> component to toggle the light and dark states of components
 
 ```jsx
-  import { DarkModeToggle } from '@roysupriyo10/figr-ui';
+  import { DarkModeToggle } from 'roysupriyo10-figr-ui';
   
   function App() {
     return (
@@ -80,7 +80,7 @@ Import the <DarkModeToggle /> component to toggle the light and dark states of c
 Customise the colors of the component library using the provided utility and types
 
 ```jsx
-  import { ColorBox, ColorPropertyNames } from '@roysupriyo10/figr-ui';
+  import { ColorBox, ColorPropertyNames } from 'roysupriyo10-figr-ui';
   
   function App() {
     return (
