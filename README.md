@@ -7,7 +7,7 @@ Install the dependency with your favourite package manager, let's use npm for th
 ```
 $ npm install --save @roysupriyo10/figr-ui
 ```
-## Additional Steps
+## Integration Steps
 
 You must include the given css file for the components to work properly
 
@@ -27,6 +27,12 @@ You must include the given css file for the components to work properly
     );
   }
 ```
+
+## Design philosphy
+
+- Easy to set up for usage, components work out of the box
+- Easy to implement custom styles using classes or inline styles
+- Framework agnostic, use it with any framework you want, provided your base renderer is react
 
 ## View component states using Storybook
 
@@ -62,6 +68,28 @@ Import the <DarkModeToggle /> component to toggle the light and dark states of c
           // ...navigation
           <DarkModeToggle
             defaultTheme="light"
+          />
+        </header>
+      </body>
+    );
+  }
+```
+
+## Customise colors
+
+Customise the colors of the component library using the provided utility and types
+
+```jsx
+  import { ColorBox, ColorPropertyNames } from '@roysupriyo10/figr-ui';
+  
+  function App() {
+    return (
+      <body>
+        <header>
+          // ...navigation
+          <ColorBox
+            propertyName={ColorPropertyNames.PRIMARY}
+            label="Primary"
           />
         </header>
       </body>

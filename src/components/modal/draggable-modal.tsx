@@ -62,9 +62,6 @@ const DraggableModal: FC<ModalProps> = ({
     const onMouseMove = (e: MouseEvent) => {
       if (!isDraggingRef.current) return;
 
-      console.log(coords.current);
-      const triggerRect = triggerRef.current?.getBoundingClientRect();
-      console.log(triggerRect);
       const nextX = e.clientX - coords.current.startX + coords.current.lastX;
       const nextY = e.clientY - coords.current.startY + coords.current.lastY;
 
@@ -111,7 +108,7 @@ const DraggableModal: FC<ModalProps> = ({
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    if (modalBackdrop) {
+    if (modalBackdrop && document.body.scrollHeight > window.innerHeight) {
       // index css file contains css declarations for this attribute state
       document.body.dataset["scrollLocked"] = isModalOpen ? "1" : undefined;
     }
@@ -127,16 +124,18 @@ const DraggableModal: FC<ModalProps> = ({
       if (modalBackdrop) {
         modalRef.current.showModal();
 
-        const sectionRect = sectionRef.current.getBoundingClientRect();
-
         sectionRef.current.style.top = "50%";
         sectionRef.current.style.left = "50%";
         sectionRef.current.style.transform = "translate(-50%, -50%)";
 
-        coords.current.startY = sectionRect.top + sectionRect.height / 2;
-        coords.current.startX = sectionRect.left * 2;
-        coords.current.lastY = sectionRect.top + sectionRect.height / 2;
-        coords.current.lastX = sectionRect.left * 2;
+        const sectionRect = sectionRef.current.getBoundingClientRect();
+
+        coords.current.startX = window.innerWidth / 2;
+        coords.current.startY = (window.innerHeight - sectionRect.height) / 2;
+        coords.current.lastX = window.innerWidth / 2;
+        coords.current.lastY =
+          (window.innerHeight - sectionRect.height) / 2 +
+          sectionRect.height / 2;
       } else {
         modalRef.current.show();
         const triggerRect = triggerRef.current.getBoundingClientRect();

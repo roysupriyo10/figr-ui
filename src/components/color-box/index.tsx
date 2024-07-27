@@ -72,7 +72,7 @@ export const ColorBox: FC<ColorBoxProps> = ({ propertyName, label }) => {
       >
         <HslColorPicker
           style={{
-            width: "100%"
+            width: "100%",
           }}
           color={{
             h: Number(color.split(" ")[0]),
